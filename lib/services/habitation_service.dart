@@ -34,7 +34,7 @@ class HabitationService{
   }
 
   List<Habitation> getAppartements(){
-    return _getHabitations(isHouse: true);
+    return _getHabitations(isHouse: false);
   }
 
   List<Habitation> _getHabitations({bool isHouse = true}){
