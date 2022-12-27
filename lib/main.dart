@@ -38,20 +38,6 @@ class MyHomePage extends StatelessWidget {
     _typehabitats = service.getTypeHabitats();
   }
 
-  /*
-  var _typehabitats = [TypeHabitat(1, "Maison"), TypeHabitat(2, "Appartement")];
-  var _habitations = [
-    Habitation(1, "maison.png", "Maison méditerranéenne",
-        "12 Rue du Coq qui chante", 3, 92, 600),
-    Habitation(2, "appartement.png", "Appartement neuf", "Rue de la soif", 1,
-        50, 555),
-    Habitation(3, "appartement.png", "Appartement 1", "Rue 1", 1, 51, 401),
-    Habitation(4, "appartement.png", "Appartement 2", "Rue 2", 1, 52, 402),
-    Habitation(5, "maison.png", "Maison 1", "Rue M1", 3, 101, 701),
-    Habitation(6, "maison.png", "Maison 2", "Rue M2", 3, 102, 702),
-  ];*/
-
-
   //to set the icon accordingly of the place type
   _buildHabitat(BuildContext context, TypeHabitat typeHabitat){
     var icon = Icons.house;
