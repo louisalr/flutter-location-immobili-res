@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:location/models/habitation.dart';
 import 'package:location/models/typehabitat.dart';
+import 'package:location/services/habitation_service.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/locaton_text_style.dart';
+import 'package:location/views/habitation_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,9 +28,17 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final HabitationService service = HabitationService();
   final String title;
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  late List<TypeHabitat> _typehabitats;
+  late List<Habitation> _habitations;
 
+  MyHomePage({Key? key, required this.title}) : super(key: key){
+    _habitations = service.getHabitationsTop10();
+    _typehabitats = service.getTypeHabitats();
+  }
+
+  /*
   var _typehabitats = [TypeHabitat(1, "Maison"), TypeHabitat(2, "Appartement")];
   var _habitations = [
     Habitation(1, "maison.png", "Maison méditerranéenne",
@@ -39,11 +49,11 @@ class MyHomePage extends StatelessWidget {
     Habitation(4, "appartement.png", "Appartement 2", "Rue 2", 1, 52, 402),
     Habitation(5, "maison.png", "Maison 1", "Rue M1", 3, 101, 701),
     Habitation(6, "maison.png", "Maison 2", "Rue M2", 3, 102, 702),
-  ];
+  ];*/
 
 
   //to set the icon accordingly of the place type
-  _buildHabitat(TypeHabitat typeHabitat){
+  _buildHabitat(BuildContext context, TypeHabitat typeHabitat){
     var icon = Icons.house;
     switch(typeHabitat.id){
       case 2:
@@ -52,7 +62,6 @@ class MyHomePage extends StatelessWidget {
       default:
         icon = Icons.home;
     }
-
     return Expanded(
         child: Container(
           height: 80,
@@ -61,35 +70,41 @@ class MyHomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
           margin: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                color: Colors.white,
-              ),
-              SizedBox(width: 5),
-              Text(
-                typeHabitat.libelle,
-                style: LocationTextStyle.regularWhiteTextStyle,
+          child: InkWell(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>
+              HabitationList(typeHabitat.id == 1),));
+            },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    typeHabitat.libelle,
+                    style: LocationTextStyle.regularWhiteTextStyle,
+                  )
+                ],
               )
-            ],
-          )
+          ),
         )
     );
   }
 
 
   //returns type_habitats declared : maison, appartement
-  _buildTypeHabitat(){
+  _buildTypeHabitat(BuildContext context){
     return Container(
       height: 100,
       child: Row(
         // centered and spaced correctly
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(_typehabitats.length, (index) => _buildHabitat(
-          _typehabitats[index])
+        children: List.generate(_typehabitats.length, (index) =>
+            _buildHabitat(context, _typehabitats[index])
         ),
       )
     );
@@ -156,7 +171,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 30),
-            _buildTypeHabitat(),
+            _buildTypeHabitat(context),
             SizedBox(height: 20),
             _buildDerniereLocation(context),
           ],
