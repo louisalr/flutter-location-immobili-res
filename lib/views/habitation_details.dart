@@ -5,7 +5,7 @@ import 'package:location/models/habitation.dart';
 import 'package:location/share/habitation_features_widget.dart';
 import 'package:location/share/habitation_option.dart';
 import 'package:location/share/location_style.dart';
-import 'package:location/share/locaton_text_style.dart';
+import 'package:location/share/location_text_style.dart';
 
 class HabitationDetails extends StatefulWidget {
   final Habitation _habitation;
