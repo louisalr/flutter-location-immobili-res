@@ -5,6 +5,7 @@ import 'package:location/models/typehabitat.dart';
 import 'package:location/services/habitation_service.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/locaton_text_style.dart';
+import 'package:location/views/habitation_details.dart';
 import 'package:location/views/habitation_list.dart';
 
 void main() {
@@ -102,6 +103,14 @@ class MyHomePage extends StatelessWidget {
     return Container(
       width: 240,
       margin: EdgeInsets.all(4.0),
+      child: GestureDetector(
+        onTap: (){
+        Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) =>
+        HabitationDetails(habitation)),
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -130,7 +139,8 @@ class MyHomePage extends StatelessWidget {
             style: LocationTextStyle.boldTextStyle,
           ),
         ],
-      )
+      ),
+      ),
     );
   }
 

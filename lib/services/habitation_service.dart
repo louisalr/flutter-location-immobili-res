@@ -1,45 +1,45 @@
-import 'package:location/models/typehabitat.dart';
+import 'package:location/models/habitations_data.dart';
 
 import '../models/habitation.dart';
+import '../models/typehabitat.dart';
+import '../models/typehabitat_data.dart';
 
 class HabitationService{
-  var _typehabitats = [TypeHabitat(1, "Maison"), TypeHabitat(2, "Appartement")];
+  var _typehabitats;
+  var _habitations;
 
-  var _habitations = List.generate(30, (index) {
-    bool maison = index%3==0;
-    return Habitation(
-      index,
-      maison ? TypeHabitat(1, "Maison") : TypeHabitat(2, "Appartement"),
-      maison ? "maison.png" : "appartement.png",
-      "${maison ? 'Maison' : 'Appartement'} ${index}", "Rue ${index}",
-      2 + index%3, 2 + index%2,
-        (maison ? 100 :50) + index,
-        ((maison ? 600 : 400) + index).toDouble()
-    );
-  });
+  HabitationService(){
+    _typehabitats = TypeHabitatData.buildList();
+    _habitations = HabitationsData.buildList();
+  }
 
-  List<TypeHabitat> getTypeHabitats(){
+  /// Get all types of habitat
+  List<TypeHabitat> getTypeHabitats() {
     return _typehabitats;
   }
 
-  List<Habitation> getHabitationsTop10(){
+  /// Get the top 10 habitations
+  List<Habitation> getHabitationsTop10() {
     return _habitations
-        .where((element) => element.id%2 == 1)
+        .where((habitation) => habitation.id%2 == 1)
         .take(10)
         .toList();
   }
 
-  List<Habitation> getMaisons(){
+  /// Get all habitations of maison type
+  List<Habitation> getMaisons() {
     return _getHabitations(isHouse: true);
   }
 
-  List<Habitation> getAppartements(){
+  /// Get all habitations of appartements type
+  List<Habitation> getAppartements() {
     return _getHabitations(isHouse: false);
   }
 
-  List<Habitation> _getHabitations({bool isHouse = true}){
+  /// Get habitations depending on the type habitat (appartement, maison)
+  List<Habitation> _getHabitations({bool isHouse = true})  {
     return _habitations
-        .where((element) => element.typeHabitat.id == (isHouse ? 1 : 2))
+        .where((habitation) => habitation.typeHabitat.id == (isHouse ? 1 : 2))
         .toList();
   }
 }
