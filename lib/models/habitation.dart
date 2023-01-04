@@ -36,7 +36,7 @@ class Habitation {
         options = (json['items'] as List)
                 .map((item) => Option.fromJson(item))
                 .toList(),
-            optionpayantes = (json['optionpayantes'] as List)
+        optionpayantes = (json['optionpayantes'] as List)
                 .map((item) => OptionPayante.fromJson(item))
                 .toList();
 }
