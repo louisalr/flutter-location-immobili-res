@@ -46,10 +46,12 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             ],
           ),
           HabitationFeaturesWidget(widget._habitation),
-          _buildDivider("Inclus"),
-          _buildItems(),
-          _buildDivider("Options"),
-          _buildOptionsPayantes(),
+          if(widget._habitation.options.isNotEmpty)
+            _buildDivider("Inclus"),
+            _buildItems(),
+          if(widget._habitation.optionpayantes.isNotEmpty)
+            _buildDivider("Options"),
+            _buildOptionsPayantes(),
           _buildRentButton(),
         ],
       ),
