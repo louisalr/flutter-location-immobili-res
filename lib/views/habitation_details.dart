@@ -6,6 +6,7 @@ import 'package:location/share/habitation_features_widget.dart';
 import 'package:location/share/habitation_option.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
+import 'package:location/views/resa_location.dart';
 
 class HabitationDetails extends StatefulWidget {
   final Habitation _habitation;
@@ -36,14 +37,6 @@ class _HabitationDetailsState extends State<HabitationDetails> {
           Container(
             margin: EdgeInsets.all(8.0),
             child: Text(widget._habitation.adresse),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              HabitationOption(Icons.group, "${widget._habitation.nbpersonnes} personnes"),
-              HabitationOption(Icons.bed, "${widget._habitation.chambres} chambres"),
-              HabitationOption(Icons.fit_screen, "${widget._habitation.superficie} m²")
-            ],
           ),
           HabitationFeaturesWidget(widget._habitation),
           if(widget._habitation.options.isNotEmpty)
@@ -141,7 +134,12 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             margin: EdgeInsets.symmetric(horizontal: 8.0),
             child: ElevatedButton(
               onPressed: () {
-                print('Louer habitation');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResaLocation(habitation: widget._habitation,)
+                  ),
+                );
               },
               child: Text('Louer'),
             ),
