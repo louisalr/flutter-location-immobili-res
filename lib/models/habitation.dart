@@ -60,6 +60,10 @@ class OptionPayante extends Option{
   OptionPayante.fromJson(Map<String, dynamic> json) :
         prix = json["prix"],
         super(json["optionpayante"]["id"], json["optionpayante"]["libelle"], description: json["optionpayante"]["description"]);
+}
 
+class OptionPayanteCheck extends OptionPayante{
+  bool checked;
 
+  OptionPayanteCheck(super.id, super.libelle, this.checked, {super.description = "", super.prix});
 }
