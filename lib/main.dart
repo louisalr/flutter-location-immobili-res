@@ -5,6 +5,11 @@ import 'package:location/models/typehabitat.dart';
 import 'package:location/services/habitation_service.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
+import 'package:location/views/BottomNavigationBarWidget.dart';
+import 'package:location/views/location_list.dart';
+import 'package:location/views/login_page.dart';
+import 'package:location/views/profil.dart';
+import 'package:location/views/validation_location.dart';
 import 'package:location/views/habitation_details.dart';
 import 'package:location/views/habitation_list.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,6 +30,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        Profil.routeName: (context) => const Profil(),
+        LoginPage.routeName: (context) => const LoginPage('/'),
+        LocationList.routeName: (context) => LocationList(),
+        ValidationLocation.routeName: (context) => const ValidationLocation(),
+      },
       localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
       supportedLocales: const[Locale('en'), Locale('fr')],
     );
@@ -169,13 +180,14 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             _buildTypeHabitat(context),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildDerniereLocation(context),
           ],
         )
       ),
+      bottomNavigationBar: const BottomNavigationBarWidget(0),
     );
   }
 }

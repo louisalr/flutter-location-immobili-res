@@ -6,6 +6,7 @@ import 'package:location/share/habitation_features_widget.dart';
 import 'package:location/share/habitation_option.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
+import 'package:location/views/BottomNavigationBarWidget.dart';
 
 class HabitationDetails extends StatefulWidget {
   final Habitation _habitation;
@@ -55,6 +56,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
           _buildRentButton(),
         ],
       ),
+      bottomNavigationBar: const BottomNavigationBarWidget(0),
     );
   }
 

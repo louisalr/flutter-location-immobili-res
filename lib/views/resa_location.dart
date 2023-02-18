@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:location/share/location_style.dart';
 
 import '../models/habitation.dart';
+import 'BottomNavigationBarWidget.dart';
 
 class ResaLocation extends StatefulWidget {
   final Habitation habitation;
@@ -60,6 +61,7 @@ class _ResaLocationState extends State<ResaLocation> {
           _buildRentButton(),
         ],
       ),
+      bottomNavigationBar: const BottomNavigationBarWidget(0),
     );
   }
 

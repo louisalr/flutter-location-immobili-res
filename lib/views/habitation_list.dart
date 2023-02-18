@@ -5,8 +5,7 @@ import 'package:location/models/habitation.dart';
 import 'package:location/services/habitation_service.dart';
 import 'package:location/share/habitation_features_widget.dart';
 import 'package:location/views/habitation_details.dart';
-
-import '../share/habitation_option.dart';
+import 'BottomNavigationBarWidget.dart';
 
 class HabitationList extends StatelessWidget {
   final HabitationService service = HabitationService();
@@ -104,6 +103,7 @@ class HabitationList extends StatelessWidget {
           itemExtent: 285,
         ),
       ),
+      bottomNavigationBar: BottomNavigationBarWidget(0),
     );
   }
 }

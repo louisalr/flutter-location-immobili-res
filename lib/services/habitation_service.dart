@@ -36,6 +36,13 @@ class HabitationService{
     return _getHabitations(isHouse: false);
   }
 
+  Habitation getHabitationById(int habitationId) {
+    return _habitations
+        .where((habitation) => habitation.id == habitationId)
+        .first;
+  }
+
+
   /// Get habitations depending on the type habitat (appartement, maison)
   List<Habitation> _getHabitations({bool isHouse = true})  {
     return _habitations
