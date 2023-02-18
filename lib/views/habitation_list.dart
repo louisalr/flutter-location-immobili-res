@@ -74,8 +74,8 @@ class HabitationList extends StatelessWidget {
                   .width,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
-                child: Image.asset(
-                  "assets/images/locations/${habitation.image}",
+                child: Image.network(
+                  "http://10.0.2.2:9000/static/images/locations/${habitation.image}",
                   fit: BoxFit.fitWidth,
                 ),
               ),

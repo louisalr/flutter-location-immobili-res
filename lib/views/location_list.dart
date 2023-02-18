@@ -7,20 +7,24 @@ import 'BottomNavigationBarWidget.dart';
 import 'package:location/models/location.dart';
 
 class LocationList extends StatefulWidget {
-  final LocationService locationService = LocationService();
   final HabitationService habitationService = HabitationService();
-  late List<Location> _locations;
   static const routeName = '/location-list';
 
-  LocationList({Key? key}) : super(key: key) {
-    _locations = locationService.getLocations();
-  }
+  LocationList({Key? key}) : super(key: key);
 
   @override
   State<LocationList> createState() => _LocationListState();
 }
 
 class _LocationListState extends State<LocationList> {
+  final LocationService service = LocationService();
+  late Future<List<Location>> _locations;
+
+  @override
+  void initState() {
+    super.initState();
+    _locations = service.getLocations();
+  }
 
   //get all the locations
   @override
@@ -29,12 +33,28 @@ class _LocationListState extends State<LocationList> {
       appBar: AppBar(
         title: const Text('Mes locations'),
       ),
-      body: ListView.builder(
-      itemCount: widget._locations.length,
-      itemBuilder: (context, index) =>
-          _buildRow(widget._locations[index], context),
-      itemExtent: 150,
-    ),
+      body: Center(
+        child: FutureBuilder(builder: (context, snapshot) {
+          if(snapshot.hasData){
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) =>
+                    _buildRow(snapshot.data![index], context),
+                itemExtent: 150,
+              );
+          }
+          else if(snapshot.hasError){
+            return Text('Une erreur est survenue lors du chargement des données');
+          }
+          else{
+            return const SizedBox(
+                width: 60,
+                height: 60,
+                child: CircularProgressIndicator(),
+              );
+          }
+        }, future: _locations),
+      ),
       bottomNavigationBar: const BottomNavigationBarWidget(2),
     );
   }
